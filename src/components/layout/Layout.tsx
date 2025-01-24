@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { ShoppingCartIcon, UserIcon } from '@heroicons/react/24/outline'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -7,125 +6,83 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div style={{ 
-      minHeight: '100vh',
-      width: '100vw',
-      overflow: 'hidden'
-    }}>
-      {/* Top bar */}
-      <div style={{
-        width: '100%',
-        backgroundColor: '#f5f5f5',
-        borderBottom: '1px solid #eee',
-        fontSize: '14px'
+    <div style={{ display: 'flex', height: '100vh' }}>
+      {/* Sidebar */}
+      <aside style={{
+        width: '250px',
+        backgroundColor: '#1a1a1a',
+        color: 'white',
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column'
       }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '8px 20px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
+        <div style={{ 
+          fontSize: '24px', 
+          fontWeight: 'bold',
+          marginBottom: '40px',
+          color: '#fff'
         }}>
-          <div>
-            Welcome visitor! <Link to="/login" style={{ color: '#ee4444' }}>Log In</Link> or{' '}
-            <Link to="/register" style={{ color: '#ee4444' }}>Create an Account</Link>
-          </div>
-          <div style={{ display: 'flex', gap: '20px' }}>
-            <span>Call us: (123) 456-7890</span>
-            <select style={{ border: 'none', background: 'none' }}>
-              <option>$ US Dollar</option>
-              <option>€ Euro</option>
-            </select>
-            <select style={{ border: 'none', background: 'none' }}>
-              <option>English</option>
-              <option>Spanish</option>
-            </select>
-          </div>
+          Gallery Admin
         </div>
-      </div>
 
-      {/* Logo and user nav */}
-      <div style={{
-        width: '100%',
-        borderBottom: '1px solid #eee'
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '20px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
-          <Link to="/" style={{ 
-            textDecoration: 'none',
-            fontSize: '24px',
-            fontWeight: 'bold'
-          }}>
-            <span style={{ color: '#ee4444' }}>flat</span>
-            <span style={{ color: '#666' }}>astic</span>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <Link to="/" style={{ color: 'white', textDecoration: 'none', padding: '10px' }}>
+            Dashboard
           </Link>
+          <Link to="/galleries" style={{ color: 'white', textDecoration: 'none', padding: '10px' }}>
+            Galleries
+          </Link>
+          <Link to="/uploads" style={{ color: 'white', textDecoration: 'none', padding: '10px' }}>
+            Image Upload
+          </Link>
+          <Link to="/users" style={{ color: 'white', textDecoration: 'none', padding: '10px' }}>
+            User Management
+          </Link>
+          <Link to="/settings" style={{ color: 'white', textDecoration: 'none', padding: '10px' }}>
+            Settings
+          </Link>
+        </nav>
+      </aside>
 
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            <Link to="/account" style={{ color: '#666', textDecoration: 'none' }}>My Account</Link>
-            <span style={{ color: '#ddd' }}>|</span>
-            <Link to="/orders" style={{ color: '#666', textDecoration: 'none' }}>Orders List</Link>
-            <span style={{ color: '#ddd' }}>|</span>
-            <Link to="/wishlist" style={{ color: '#666', textDecoration: 'none' }}>Wishlist</Link>
-            <span style={{ color: '#ddd' }}>|</span>
-            <Link to="/checkout" style={{ color: '#666', textDecoration: 'none' }}>Checkout</Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Main navigation */}
-      <header style={{
-        width: '100vw',
-        backgroundColor: '#333',
-        position: 'sticky',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '0 20px',
-        }}>
-          <nav style={{
-            display: 'flex',
-            gap: '5px'
-          }}>
-            {[
-              'HOME', 'SLIDERS', 'SHOP', 'PORTFOLIO', 
-              'PAGES', 'BLOG', 'FEATURES', 'CONTACT'
-            ].map(item => (
-              <Link 
-                key={item}
-                to={`/${item.toLowerCase()}`} 
-                style={{ 
-                  color: 'white', 
-                  textDecoration: 'none',
-                  padding: '20px 25px',
-                  transition: 'background-color 0.2s',
-                }}
-              >
-                {item}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
-
+      {/* Main content */}
       <main style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '40px 20px',
-        width: '100%'
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+        padding: '20px',
+        overflow: 'auto'
       }}>
-        {children}
+        {/* Header */}
+        <header style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '20px',
+          backgroundColor: 'white',
+          marginBottom: '20px',
+          borderRadius: '8px'
+        }}>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <span>Admin User</span>
+            <button style={{
+              padding: '8px 16px',
+              backgroundColor: '#1a1a1a',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}>
+              Logout
+            </button>
+          </div>
+        </header>
+
+        {/* Content area */}
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '8px',
+          padding: '20px'
+        }}>
+          {children}
+        </div>
       </main>
     </div>
   )

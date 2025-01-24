@@ -110,9 +110,6 @@ export const Layout = ({ children }: LayoutProps) => {
                   textDecoration: 'none',
                   padding: '20px 25px',
                   transition: 'background-color 0.2s',
-                  ':hover': {
-                    backgroundColor: '#ee4444'
-                  }
                 }}
               >
                 {item}

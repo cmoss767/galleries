@@ -1,0 +1,24 @@
+{
+  "name": "gallery-admin-backend",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "yarn build && gcloud functions deploy",
+    "dev": "functions-framework --target=YOUR_FUNCTION_NAME"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^7.1.0",
+    "@google-cloud/functions-framework": "^3.3.0",
+    "@google-cloud/storage": "^7.7.0",
+    "firebase-admin": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

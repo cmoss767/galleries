@@ -1,10 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { CartProvider } from './context/CartContext';
-import Cart from './components/Cart';
-import ProductList from './components/ProductList';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { CartProvider } from './context/CartContext'
+import Cart from './components/Cart'
+import ProductList from './components/ProductList'
 
-const App: React.FC = () => {
+function App() {
   return (
     <CartProvider>
       <Router>
@@ -27,7 +26,7 @@ const App: React.FC = () => {
         </div>
       </Router>
     </CartProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

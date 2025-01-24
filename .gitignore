@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 
 .env
+
+# Terraform
+.terraform
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+backend/service-account-key.json

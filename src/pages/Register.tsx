@@ -1,31 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../services/auth';
+import { register } from '../services/auth';
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(email, password);
+      await register({ email, password, displayName });
       navigate('/');
     } catch (err) {
       console.error(err);
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError('Failed to login');
+        setError('Failed to register');
       }
     }
   };
 
   return (
     <div style={{ maxWidth: '400px', margin: '40px auto', padding: '20px' }}>
-      <h1 style={{ marginBottom: '20px' }}>Login</h1>
+      <h1 style={{ marginBottom: '20px' }}>Register</h1>
       {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '15px' }}>
@@ -46,6 +47,15 @@ const Login = () => {
             style={{ width: '100%', padding: '8px' }}
           />
         </div>
+        <div style={{ marginBottom: '15px' }}>
+          <label style={{ display: 'block', marginBottom: '5px' }}>Display Name</label>
+          <input
+            type="text"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            style={{ width: '100%', padding: '8px' }}
+          />
+        </div>
         <button
           type="submit"
           style={{
@@ -57,17 +67,11 @@ const Login = () => {
             borderRadius: '4px'
           }}
         >
-          Login
+          Register
         </button>
-        <div style={{ marginTop: '20px', textAlign: 'center' }}>
-          Don't have an account?{' '}
-          <a href="/register" style={{ color: '#1a1a1a', textDecoration: 'underline' }}>
-            Register here
-          </a>
-        </div>
       </form>
     </div>
   );
 };
 
-export default Login; 
+export default Register; 

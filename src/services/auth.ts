@@ -1,19 +1,14 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, Auth } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from './firebase';
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+export const login = async (email: string, password: string) => {
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth: Auth = getAuth(app);
+export const logout = async () => {
+  return signOut(auth);
+};
 
 export const getAuthToken = async (): Promise<string> => {
   const user = auth.currentUser;
@@ -25,10 +20,32 @@ export const getAuthToken = async (): Promise<string> => {
   return user.getIdToken();
 };
 
-export const login = async (email: string, password: string) => {
-  return signInWithEmailAndPassword(auth, email, password);
-};
-
 export const getCurrentUser = () => {
   return auth.currentUser;
+};
+
+export interface RegisterData {
+  email: string;
+  password: string;
+  displayName: string;
+}
+
+export const register = async (data: RegisterData) => {
+  // 1. Create the auth user
+  const { user } = await createUserWithEmailAndPassword(
+    auth, 
+    data.email, 
+    data.password
+  );
+
+  // 2. Create the Firestore user document
+  await setDoc(doc(db, 'users', user.uid), {
+    email: data.email,
+    displayName: data.displayName,
+    role: 'user', // New users are regular users by default
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  });
+
+  return user;
 }; 

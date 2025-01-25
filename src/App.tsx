@@ -8,6 +8,7 @@ import Galleries from './pages/Galleries'
 import ImageUpload from './pages/ImageUpload'
 import UserManagement from './pages/UserManagement'
 import Settings from './pages/Settings'
+import Register from './pages/Register'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
@@ -24,6 +25,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/*"
             element={

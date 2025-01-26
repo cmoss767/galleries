@@ -156,6 +156,20 @@ const GalleryDetail = () => {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <div>
+          <button
+            onClick={() => navigate('/galleries')}
+            style={{
+              padding: '8px 16px',
+              backgroundColor: '#6c757d',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              marginBottom: '10px',
+              cursor: 'pointer'
+            }}
+          >
+            ← Back to Galleries
+          </button>
           <h1>{gallery.name}</h1>
           <p>{gallery.description}</p>
         </div>

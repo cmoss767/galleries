@@ -7,15 +7,13 @@ service firebase.storage {
       return request.auth != null;
     }
     
-    function isAdmin() {
-      return isAuthenticated() && 
-        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
-    }
-
     // Gallery images
-    match /galleries/{galleryId}/{allImages=**} {
+    match /galleries/{galleryId}/{imageId} {
       allow read: if isAuthenticated();
-      allow write: if isAdmin();
+      allow create: if isAuthenticated() &&
+        firestore.get(/databases/(default)/documents/galleries/$(galleryId)).data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() &&
+        firestore.get(/databases/(default)/documents/galleries/$(galleryId)).data.userId == request.auth.uid;
     }
   }
 } 

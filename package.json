@@ -1,0 +1,17 @@
+{
+  "name": "gallery-project",
+  "private": true,
+  "workspaces": [
+    "admin",
+    "gallery-viewer"
+  ],
+  "scripts": {
+    "admin": "yarn workspace admin dev",
+    "viewer": "yarn workspace gallery-viewer dev",
+    "dev": "concurrently \"yarn admin\" \"yarn viewer\"",
+    "build": "yarn workspaces run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

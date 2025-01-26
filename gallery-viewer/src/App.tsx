@@ -6,7 +6,9 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<div>Gallery Viewer Home</div>} />
         <Route path="/view/:galleryId" element={<GalleryViewer />} />
+        <Route path="*" element={<div>Page not found</div>} />
       </Routes>
     </Router>
   )

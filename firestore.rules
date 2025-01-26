@@ -20,14 +20,14 @@ service cloud.firestore {
 
     // Galleries collection
     match /galleries/{galleryId} {
-      allow read: if isAuthenticated();
+      allow read: if true;  // Allow public read access
       allow create: if isAuthenticated();
       allow update, delete: if isAuthenticated() && 
         resource.data.userId == request.auth.uid;
       
       // Images subcollection
       match /images/{imageId} {
-        allow read: if isAuthenticated();
+        allow read: if true;  // Allow public read access
         allow write: if isAuthenticated() && 
           get(/databases/$(database)/documents/galleries/$(galleryId)).data.userId == request.auth.uid;
       }

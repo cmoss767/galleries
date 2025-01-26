@@ -19,11 +19,13 @@ const GalleryViewer = () => {
   }, [galleryId]);
 
   const fetchGallery = async () => {
+    console.log('Fetching gallery:', galleryId);
     try {
       const docRef = doc(db, 'galleries', galleryId!);
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
+        console.log('Gallery data:', docSnap.data());
         setGallery({ id: docSnap.id, ...docSnap.data() } as Gallery);
         
         // Fetch images

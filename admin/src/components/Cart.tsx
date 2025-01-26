@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { TrashIcon } from '@heroicons/react/24/outline';
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
@@ -43,7 +42,6 @@ const Cart: React.FC = () => {
                     onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: item.id })}
                     className="text-red-500 hover:text-red-700 p-2"
                   >
-                    <TrashIcon className="h-5 w-5" />
                   </button>
                 </div>
               </div>
